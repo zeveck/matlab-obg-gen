@@ -1,15 +1,17 @@
 % Builds docs/images/social-preview.png (1280x640), the GitHub repo's social
-% preview: the name over one big button just tapped, its ripples spreading
-% out to the edges of the image. Everything is drawn in MATLAB.
+% preview: the name over a little one-button game console, its screen
+% showing a game mid-jump and its single big button just pressed.
+% Everything is drawn in MATLAB.
 %
 % Link previews crop hard. Teams shows a small 5:4 thumbnail of only the
 % centre of the image (measured: about x 333-948, y 77-569 of 1280x640), so
-% the name and the button sit inside x 350-930, y 90-550, drawn big enough to
-% read at thumbnail size. The ripples fill the rest, so any crop just trims
-% rings and still looks deliberate.
+% the name and the console sit inside x 350-930, y 90-550, drawn big enough
+% to read at thumbnail size. A dot grid runs to the edges, so any crop looks
+% deliberate.
 here = fileparts(mfilename('fullpath'));
-navy = [.06 .07 .14]; cyan = [.3 .95 1];
-violet = [.65 .45 1]; teal = [.2 .9 .8]; gold = [1 .85 .25];
+navy = [.06 .07 .14]; cyan = [.3 .95 1]; amber = [1 .7 .2];
+violet = [.65 .45 1]; teal = [.2 .9 .8]; gold = [1 .85 .25]; grey = [.75 .8 .92];
+body = [.16 .19 .33];
 
 f = uifigure('Visible', 'off', 'Units', 'pixels', 'Position', [50 50 1280 640]);
 ax = uiaxes(f, 'Units', 'pixels');
@@ -18,42 +20,53 @@ ax.YDir = 'reverse';
 ax.XTick = []; ax.YTick = []; ax.XAxis.Visible = 'off'; ax.YAxis.Visible = 'off';
 ax.Toolbar.Visible = 'off'; disableDefaultInteractivity(ax); hold(ax, 'on');
 patch(ax, [-100 1380 1380 -100], [-100 -100 740 740], navy, 'EdgeColor', 'none');
+[gx, gy] = meshgrid(20:40:1260, 20:40:620);   % a faint dot grid to the edges
+plot(ax, gx(:), gy(:), '.', 'Color', navy + .12, 'MarkerSize', 7);
 
-c = 640 + 365i; t = (0:179)*2*pi/180;   % no repeated end point (it shows as a seam)
-R = [170 210 258 314 378 450 530 620 720];
-for j = 1:numel(R)   % ripples, fading as they spread
-    z = c + R(j)*exp(1i*[t t(1:3)]);   % overlap the ends so there's no cap at the join
-    % a line, not a patch outline: patch edges show a seam where they close
-    plot(ax, real(z), imag(z), '-', 'LineWidth', 4 - 2*j/numel(R), ...
-        'Color', navy + .75*(1 - j/(numel(R) + 1))^1.3*(cyan - navy));   % opaque: no overlap tick at the join
+text(ax, 640, 100, 'matlab-obg-gen', 'FontSize', 46, 'FontWeight', 'bold', 'Color', 'w', ...
+    'HorizontalAlignment', 'center');
+
+% the pitch out to the sides (seen on GitHub; Teams crops it away)
+text(ax, 180, 330, sprintf('Describe a\none-button\ngame'), 'FontSize', 26, 'FontWeight', 'bold', ...
+    'Color', grey, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle');
+text(ax, 1095, 330, sprintf('Play it\nin MATLAB'), 'FontSize', 26, 'FontWeight', 'bold', ...
+    'Color', cyan, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle');
+for x0 = [282 958]   % arrows: idea -> console -> play (outside the Teams crop)
+    patch(ax, x0 + [0 30 30 46 30 30 0], 330 + [-3 -3 -11 0 11 3 3], grey*.7, 'EdgeColor', 'none');
 end
-% a few balls riding the ripples, in the game colours
-b = c + [R(2)*exp(-2.5i) R(4)*exp(-.45i) R(3)*exp(.35i) R(5)*exp(-2.95i) R(6)*exp(-.2i)];
-k = [violet; teal; gold; teal; violet];
-for j = 1:numel(b)
-    plot(ax, real(b(j)), imag(b(j)), 'o', 'MarkerSize', 20 - 2*j, ...
-        'MarkerFaceColor', k(j, :), 'Color', k(j, :)/2, 'LineWidth', 2);
+
+% the console
+t = (0:179)*2*pi/180;
+rectangle(ax, 'Position', [445 160 390 405], 'Curvature', .16, 'FaceColor', body, ...
+    'EdgeColor', cyan*.7, 'LineWidth', 3);
+
+% its screen: a little game, mid-jump
+sx = [475 805]; sy = [185 395];
+rectangle(ax, 'Position', [sx(1) sy(1) diff(sx) diff(sy)], 'Curvature', .06, ...
+    'FaceColor', [.04 .05 .1], 'EdgeColor', [.08 .1 .2], 'LineWidth', 3);
+patch(ax, [sx(1)+4 sx(2)-4 sx(2)-4 sx(1)+4], [360 360 sy(2)-6 sy(2)-6], [.13 .3 .36], 'EdgeColor', 'none');
+plot(ax, [sx(1)+4 sx(2)-4], [360 360], '-', 'Color', teal, 'LineWidth', 3);
+patch(ax, [690 708 726 744 762], [360 326 360 326 360], amber, 'EdgeColor', 'none');   % spikes
+arc = @(x) 346 - 105*sin(pi*(x - 540)/260);   % the jump, over the spikes
+x = linspace(540, 800, 15); k = x < 790 & abs(x - 650) > 20;
+plot(ax, x(k), arc(x(k)), '.', 'Color', grey, 'MarkerSize', 10);
+plot(ax, 650, arc(650), 'o', 'MarkerSize', 26, 'MarkerFaceColor', violet, ...
+    'Color', violet/2, 'LineWidth', 2.5);
+plot(ax, [575 765], [245 225], 'o', 'MarkerSize', 10, 'MarkerFaceColor', gold, 'Color', gold*.6);
+text(ax, sx(1) + 14, sy(1) + 20, 'SCORE 120', 'FontSize', 11, 'FontWeight', 'bold', 'Color', grey);
+
+% its one button, just pressed
+b = 640 + 480i;
+for r = [74 64]   % press ripples
+    z = b + r*exp(1i*[t t(1:3)]);
+    plot(ax, real(z), imag(z), '-', 'LineWidth', 3, 'Color', body + (r == 64)*.5*(cyan - body) + (r == 74)*.25*(cyan - body));
 end
-for j = 1:6   % soft glow
-    z = c + (138 + 5*j)*exp(1i*t);
-    patch(ax, real(z), imag(z), cyan, 'EdgeColor', 'none', 'FaceAlpha', .06);
-end
-z = c + 141*exp(1i*t);   % the rim as filled discs, not a thick outline (no corner at the join)
+z = b + 54*exp(1i*t);
+patch(ax, real(z), imag(z), cyan*.55, 'EdgeColor', 'none');
+z = b + 3i + 50*exp(1i*t);
 patch(ax, real(z), imag(z), cyan, 'EdgeColor', 'none');
-z = c + 134*exp(1i*t);
-patch(ax, real(z), imag(z), [.12 .16 .3], 'EdgeColor', 'none');
-z = c + 110*exp(1i*t);
-patch(ax, real(z), imag(z), cyan, 'EdgeColor', 'none', 'FaceAlpha', .92);
-text(ax, real(c), imag(c), 'TAP', 'FontSize', 46, 'FontWeight', 'bold', 'Color', navy, ...
-    'HorizontalAlignment', 'center');
-
-% the name, on a soft dark glow so the ripples don't run through it
-for j = 1:8
-    z = 640 + 112i + (1 - j/9)*(330*cos(t) + 1i*75*sin(t));
-    patch(ax, real(z), imag(z), navy, 'EdgeColor', 'none', 'FaceAlpha', .3);
-end
-text(ax, 640, 112, 'matlab-obg-gen', 'FontSize', 50, 'FontWeight', 'bold', 'Color', 'w', ...
-    'HorizontalAlignment', 'center');
+z = b - 12 - 14i + 18*exp(1i*t);   % highlight
+patch(ax, real(z), imag(z), 'w', 'EdgeColor', 'none', 'FaceAlpha', .35);
 
 ax.XLim = [0 1280]; ax.YLim = [0 640];   % drawing can re-fit the limits: lock them
 ax.XLimMode = 'manual'; ax.YLimMode = 'manual';
