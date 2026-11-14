@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026.11.13.3
+
+- Friendlier, more general wording: a plugin for making one-button MATLAB
+  games, inspired by and following the format of the Mini Hack; sharing to
+  its gallery is optional.
+
 ## 2026.11.13.2
 
 - `--submit` records the entry's Play Game link (MATLAB Drive) and puts it,

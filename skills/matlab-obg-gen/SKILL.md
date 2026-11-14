@@ -1,14 +1,15 @@
 ---
 name: matlab-obg-gen
 description: >-
-  Make a complete, polished entry for the MATLAB One-Button Game Mini Hack from
-  a description. Writes a brief and design, has review agents vet it against
-  the contest's rules and judging criteria, builds game.m in milestones,
-  play-tests it headlessly in MATLAB with scripted taps and bots, runs
-  playability and polish passes, drafts the Tips & Tricks post, and reports
-  when it's ready to try. Checks and helps install MATLAB, the MATLAB MCP
-  connection and the contest tools first. Also brainstorms concepts, changes
-  existing games, and submits a finished game to the contest.
+  Make a complete, polished one-button game in MATLAB from a description, in
+  the One-Button Game Mini Hack's format (one game.m, one button, at most
+  10,000 characters). Writes a brief and design, has review agents vet it,
+  builds game.m in milestones, play-tests it headlessly in MATLAB with
+  scripted taps and bots, proves every level beatable by a person, runs
+  playability and polish passes, and reports when it's ready to play. Checks
+  and helps install MATLAB, the MATLAB MCP connection and the Mini Hack's
+  starter tools first. Also brainstorms concepts, changes existing games,
+  and (only when asked) shares a game in the Mini Hack gallery.
 argument-hint: "<game idea> [--rounds 1-3] [--plan-only] | ideas [n] [theme] | --change <slug> <what> | --continue [slug] | --submit [slug] | setup | help"
 ---
 
