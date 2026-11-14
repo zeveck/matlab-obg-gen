@@ -56,7 +56,7 @@ value per point instead of two halved the index operations. That rewrite
 alone won back about 470 counted characters.
 
 With these two tricks, plus merging all 121 tiles into one patch, the same
-game fits in 9,903 characters.
+game fits in 9,927 characters.
 
 ## Bonus: a measured performance trap
 
@@ -85,4 +85,4 @@ the guard silently stops working.
 `update`. `delete` is banned, so pool your graphics. And `rowVector(colIdx)`
 returns a row, which quietly broadcasts to a matrix when you add a column.
 
-*Play Ninefold: `<entry URL>`*
+*Play Ninefold: `https://www.mathworks.com/matlabcentral/communitycontests/contests/10/entries/16598`*

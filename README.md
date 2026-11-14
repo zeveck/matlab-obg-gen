@@ -140,7 +140,7 @@ Generated levels are allowed only as a fixed set of seeds that have each been pr
 
 *Nine rooms, nine levels, one button: turn the glowing room to pour every ball home.*
 
-Coloured balls drip into a box of nine rooms full of cups, shelves, seesaws and trap doors. A glow moves from room to room and then around the whole box; tap to turn whatever is glowing a quarter turn. Every ball has to leave through a hole of its own colour before the clock runs out. 9,903 / 10,000 characters, with all nine levels proven beatable with human timing.
+Coloured balls drip into a box of nine rooms full of cups, shelves, seesaws and trap doors. A glow moves from room to room and then around the whole box; tap to turn whatever is glowing a quarter turn. Every ball has to leave through a hole of its own colour before the clock runs out. 9,927 / 10,000 characters, with all nine levels proven beatable with human timing. [Play it in the contest gallery](https://www.mathworks.com/matlabcentral/communitycontests/contests/10/entries/16598).
 
 | | |
 |---|---|

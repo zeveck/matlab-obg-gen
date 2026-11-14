@@ -2,6 +2,8 @@
 
 *Nine rooms, nine levels, one button: turn the glowing room to pour every ball home.*
 
+**Play it in the contest gallery:** https://www.mathworks.com/matlabcentral/communitycontests/contests/10/entries/16598
+
 Coloured balls drip into a box divided into nine 3×3 rooms full of cups,
 shelves, staircases, seesaws and trap doors. A glow moves from room to room
 and then around the whole box. **Tap to turn whatever is glowing a quarter
@@ -48,7 +50,7 @@ minihackContest.play
 
 ## Inside
 
-- 9,903 / 10,000 characters (comments excluded, as the contest counts them).
+- 9,927 / 10,000 characters (comments excluded, as the contest counts them).
 - The box is an 11×11 tile grid. Turning a room is `T(i,j) = rot90(T(i,j),-1)`.
   Each ball's tile is a complex number `col + 1i*row`, so turning the balls
   is `centre + (z - centre)*1i`, and the animation eases back with

@@ -1,5 +1,5 @@
 function g = game()
-% NINEFOLD - a one-button marble puzzle.
+% NINEFOLD by Rich Conlan - a one-button marble puzzle.
 % Coloured balls drip into a box of nine 3x3 rooms. A glow snakes through
 % the rooms and then the whole box; tap to turn whatever is glowing a
 % quarter turn clockwise. Pour every ball out of a matching exit before
@@ -50,7 +50,7 @@ s.bn = mk(300+290i + 275*real(u) + 115i*imag(u), [0 0 .1]);
 s.fx = mk(400+300i + 400*real(u) + 300i*imag(u), s.K(5,:));
 % every text in one call: title, level, balls to go, score, strays, help, banner x2
 s.tx = text(ax, [680*ones(1, 6) 300 300], [45 105 162 215 265 480 235 325], ...
-    {'NINEFOLD', '', '', '', '', sprintf('TAP = TURN THE\nGLOWING ROOM'), '', ''}, ...
+    {'NINEFOLD', '', '', '', '', sprintf('TAP = TURN THE\nGLOWING ROOM\n\n\n\n\nby Rich Conlan'), '', ''}, ...
     'FontWeight', 'bold', 'HorizontalAlignment', 'center', 'Color', 'w');
 set(s.tx, {'FontSize'}, {24; 20; 14; 20; 16; 13; 40; 16});
 set(s.tx([1 6 8]), 'Color', s.K(4,:));
