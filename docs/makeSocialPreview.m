@@ -9,10 +9,10 @@ violet = [.65 .45 1]; teal = [.2 .9 .8]; gold = [1 .85 .25]; grey = [.75 .8 .92]
 f = uifigure('Visible', 'off', 'Units', 'pixels', 'Position', [50 50 1280 640]);
 ax = uiaxes(f, 'Units', 'pixels');
 ax.InnerPosition = [1 1 1280 640];   % the plot area itself, not its outer box
-ax.XLim = [0 1280]; ax.YLim = [0 640]; ax.YDir = 'reverse';
+ax.YDir = 'reverse';
 ax.XTick = []; ax.YTick = []; ax.XAxis.Visible = 'off'; ax.YAxis.Visible = 'off';
 ax.Toolbar.Visible = 'off'; disableDefaultInteractivity(ax); hold(ax, 'on');
-patch(ax, [0 1280 1280 0], [0 0 640 640], navy, 'EdgeColor', 'none');
+patch(ax, [-2000 3000 3000 -2000], [-2000 -2000 3000 3000], navy, 'EdgeColor', 'none');
 
 % the button, just tapped: glow, ripple rings, the cap
 c = 930 + 330i; t = linspace(0, 2*pi, 120);
@@ -64,7 +64,14 @@ text(ax, 62, 280, sprintf('Describe a one-button game.\nPlay it in MATLAB.'), ..
 text(ax, 62, 420, sprintf(['A Claude Code plugin that designs, builds\n' ...
     'and play-tests one-button MATLAB games,\nand makes sure every level can be beaten.']), ...
     'FontSize', 18, 'Color', grey, 'VerticalAlignment', 'middle');
-ax.XLim = [0 1280]; ax.YLim = [0 640];   % drawing can re-fit the limits: lock them again
+% Link previews (Teams, Slack, ...) crop the image to their own card shape,
+% so shrink the whole picture by sh about the centre: everything that
+% matters sits in the middle ~1000x500 and only background reaches the edges.
+sh = .78;
+for o = findobj(ax, '-property', 'FontSize')', o.FontSize = o.FontSize*sh; end
+for o = findobj(ax, 'Type', 'line')', o.MarkerSize = o.MarkerSize*sh; end
+for o = findobj(ax, '-property', 'LineWidth')', o.LineWidth = o.LineWidth*sh; end
+ax.XLim = 640 + [-640 640]/sh; ax.YLim = 320 + [-320 320]/sh;   % lock the zoomed-out limits
 ax.XLimMode = 'manual'; ax.YLimMode = 'manual';
 drawnow;
 
