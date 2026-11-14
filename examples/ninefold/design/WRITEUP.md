@@ -1,4 +1,4 @@
-# Draft Tips & Tricks post (for the person to post)
+# How Ninefold was made (a write-up to share if you like)
 
 **Title:** Your 10,000 characters are counted after MATLAB re-spaces your code (and two ways to win them back)
 

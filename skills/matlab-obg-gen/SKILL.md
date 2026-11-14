@@ -13,12 +13,14 @@ description: >-
 argument-hint: "<game idea> [--rounds 1-3] [--plan-only] | ideas [n] [theme] | --change <slug> <what> | --continue [slug] | --submit [slug] | setup | help"
 ---
 
-# /matlab-obg-gen — make a One-Button Game Mini Hack entry
+# /matlab-obg-gen — make a one-button game in MATLAB
 
-You are making a real, finished contest entry: one `game.m` that a stranger
-clicks on in the MATLAB Central gallery, understands in five seconds, and
-plays again. The person described the game (a sentence or a page) and walked
-away; they come back to a game they can play right now and a short report.
+You are making a real, finished one-button game: one `game.m` that someone
+opens, understands in five seconds, enjoys, and plays again. It follows the
+One-Button Game Mini Hack's format (see `references/format.md`), so it can
+also be shared in that gallery if the person wants. The person described
+the game (a sentence or a page) and walked away; they come back to a game
+they can play right now and a short report.
 
 Every specific thing they asked for belongs in the game; fill gaps with
 choices in the same spirit. Loose ideas ("maybe", "or something") are
@@ -39,9 +41,9 @@ Five rules beat everything else:
    levels are generated, ship only a finite set of seeds that a solver has
    cleared. Never ship endless levels that can't all be verified. If a level
    can't be proven beatable, fix it or cut it, and say so.
-3. **The contest rules are hard gates.** `minihackContest.validate` must
+3. **The format's rules are hard gates.** `minihackContest.validate` must
    print `Validation passed.` with the live rules (not `SKIPPED`). Over the
-   character cap or one banned call means the entry is rejected.
+   character cap or one banned call means the game doesn't fit the format.
 4. **One button, taps only.** `pressed` is a one-frame edge. There is no hold,
    no release, no position. Every mechanic is built from *when* and *how
    often* the player taps.
@@ -53,14 +55,14 @@ their game, not about phases or agents.
 
 Read each reference file when you reach its phase:
 
-- `references/contest.md` — the contract, rules, judging, quirks. **Read at
-  preflight, always.**
+- `references/format.md` — the contract, rules, what makes a game good,
+  quirks. **Read at preflight, always.**
 - `references/matlab-craft.md` — how to make MATLAB graphics look great and
   run fast inside 10,000 characters.
 - `references/design-template.md` — Phase 2.
 - `references/review-roles.md` — Phases 3, 6, 7.
 - `references/playtest.md` — Phases 4 and 5: the harness, bots, checks.
-- `references/tips-post.md` — Phase 8 and `--submit`.
+- `references/writeup.md` — Phase 8 and `--submit`.
 - `references/setup.md` — when the setup check finds anything missing.
 
 `SKILL_DIR` below means this skill's folder, `${CLAUDE_SKILL_DIR}`
@@ -85,7 +87,7 @@ Read each reference file when you reach its phase:
 - **`--rounds n`** — design review rounds, 1-3 (default 1).
 - **`setup`** — only run the setup check and fix what's missing (Preflight
   step 0), then stop.
-- **`--submit [slug]`** — submit a finished game to the contest (see
+- **`--submit [slug]`** — share a finished game in the Mini Hack gallery (see
   "Submitting" below). Most recently changed game if no slug.
 
 ## Layout
@@ -94,14 +96,14 @@ Each game lives in its own folder: `games/<slug>/` (short kebab-case name).
 
 ```
 games/<slug>/
-  game.m              the entry (must be named game.m)
+  game.m              the game (must be named game.m)
   README.md           how to play, what's in it
   design/
     STATUS.md         requests (verbatim), settings, phase checklist, notes
     BRIEF.md
     GAME_DESIGN.md
     REVIEW_LOG.md
-    TIPS_POST.md      draft Tips & Tricks post
+    WRITEUP.md        "how it was made" write-up
     tests/            harness scripts (.m) and bot policies
     shots/            screenshots and GIFs from the harness
 ```
@@ -115,7 +117,7 @@ starter stub; leave it alone unless the person asks.
    `SKILL_DIR/tools/check-setup.ps1 -Project <project folder>` (PowerShell;
    on macOS/Linux check the same items by hand, per `references/setup.md`).
    It reports MATLAB (R2021a+, and a broken-path warning), the MATLAB MCP
-   server, the Agentic Toolkit, the contest toolkit, the starter project
+   server, the Agentic Toolkit, the Mini Hack tools, the starter project
    and free RAM. For anything MISSING, follow `references/setup.md`: do
    what you can yourself (installing MATLAB with mpm into a user folder,
    repairing the path, installing and configuring the Agentic Toolkit,
@@ -136,7 +138,7 @@ starter stub; leave it alone unless the person asks.
    `~isempty(which('minihackContest.validate'))`. If false, open the project
    (`openProject('<project>/minihackContest.prj')`), which installs it. Then
    run `SKILL_DIR/tools/fetchrules.m` and compare with
-   `references/contest.md`; if the live list differs, trust the live list and
+   `references/format.md`; if the live list differs, trust the live list and
    note the difference in STATUS.md.
 4. **Start `design/STATUS.md`:** heading with the working name, the request
    verbatim, settings, and a checklist of the phases. Keep it current; it's
@@ -146,7 +148,7 @@ starter stub; leave it alone unless the person asks.
 
 `design/BRIEF.md`, one page: the game in one sentence and the feeling it
 should give; **what they asked for** as a checklist in their words (mark the
-loose ones); who plays it (a gallery visitor with 2 minutes and no
+loose ones); who plays it (someone with 2 minutes and no
 instructions); the one-button idea in a sentence; decisions you made for
 them.
 
@@ -154,7 +156,7 @@ them.
 
 `design/GAME_DESIGN.md` from `references/design-template.md`. The parts that
 matter most here: the tap mechanic and why it's clever, the first 5 seconds
-(it's the preview GIF and the gallery thumbnail), the difficulty curve over a
+(the title screen, and the thumbnail if it'"'"'s shared), the difficulty curve over a
 2-3 minute run, the state machine, the feedback (every tap visibly answers at
 once; scoring gets a small celebration), the character budget, the finite
 level list and how each will be proven beatable, and a title screen that
@@ -169,8 +171,8 @@ One round by default (`--rounds` for more). A second round only if the
 first found a must-fix that changed the design substantially. Each round:
 
 1. **Review, in parallel**: dispatch the **Player**, **MATLAB builder** and
-   **Contest judge** agents at once (roles in `references/review-roles.md`),
-   each with the brief, the design, and `references/contest.md`. Builder also
+   **Fresh eyes** agents at once (roles in `references/review-roles.md`),
+   each with the brief, the design, and `references/format.md`. Builder also
    gets `references/matlab-craft.md`. Don't show one another's findings.
    Design reviewers read; they never run MATLAB.
 2. **Refine** yourself: you're the builder and know the character budget.
@@ -212,7 +214,7 @@ is over ~9,000, simplify the design now, before building more.
    characters are left. Extra effects come last and go first.
 
 Keep the source readable: short helper functions, sensible names, few
-comments (comments are free but keep them useful). Judges read the code.
+comments (comments are free but keep them useful). People read the code.
 
 ## Phase 5 — Play-test
 
@@ -257,9 +259,8 @@ against the polish checklist. Fix everything; re-shoot.
 1. `README.md` for the game: name, one line, how to play (one sentence), what
    to look for, how to run it (`cd games/<slug>` then
    `minihackContest.play`), character count.
-2. `design/TIPS_POST.md`: a draft Tips & Tricks post per
-   `references/tips-post.md`. The post is required for the grand prizes and
-   the Most Played award, and its quality is judged.
+2. `design/WRITEUP.md`: a short "how it was made" write-up per
+   `references/writeup.md`, teaching a MATLAB technique the game uses.
 3. Tick off STATUS.md.
 4. **Report** briefly and plainly: how many levels there are and that each
    one has a replayed solution proving it fully beatable; the name and the
@@ -269,47 +270,47 @@ against the polish checklist. Fix everything; re-shoot.
    work (plainly), the GIF path, and two or three ready-to-paste
    `/matlab-obg-gen --change <slug> ...` ideas.
 
-**Never submit as part of making a game.** Submission is public; it only
+**Never share a game as part of making it.** Sharing is public; it only
 happens through `--submit`, with the person's explicit go-ahead.
 
-## Submitting (`--submit [slug]`)
+## Sharing in the Mini Hack gallery (`--submit [slug]`)
 
-Automate everything except the decision itself.
+Optional, and only when the person asks. Automate everything except the
+decision itself.
 
-1. **Setup check** (Preflight step 0) and the contest toolkit is loaded.
+1. **Setup check** (Preflight step 0) and the Mini Hack tools are loaded.
 2. **Gates. Stop and say which one failed, and why, if any fails:**
    - the proof of beatability passes **right now** on the current
      `game.m`: run the game's `design/tests/prove.m` (every level's
      recorded solution clears it fully, and the human-timing check passes).
-     No `prove.m`, or a failing one, means no submission until it's fixed;
+     No `prove.m`, or a failing one, means it isn't shared until it's fixed;
    - `minihackContest.validate('<abs path>/game.m')` prints
      `Validation passed.` with a character count (not SKIPPED);
    - the quick suite (`obgsuite ... 'Quick', true`) passes, with no errors
      and no object growth;
    - the first frame (tick 0) and a GIF of the first 5 s look right. This
-     is what the server records as the gallery preview, so Read them.
+     is what the server records as the gallery thumbnail, so Read them.
 3. **Ask once, with everything they need to decide:** one question with
    2-3 suggested titles (≤ 80 characters, from the README's name and
    tagline) and the facts: the proof status, the character count, the
-   preview frame's path, and that submitting is public under their
+   preview frame's path, and that sharing is public under their
    MathWorks account. They pick or type a title, which is the go-ahead.
    Without an explicit yes, stop.
 4. **Submit** in MATLAB (MCP, or batch if no MCP):
    `cd('<abs path>/games/<slug>'); r = minihackContest.submit('title', "<title>", 'confirm', true)`.
    If it fails on authentication, ask them to sign in to MATLAB (Home tab ->
    sign in) and retry once. Any other error: show it plainly, don't retry.
-5. **Record** the entry URL, title, date, character count and the git
-   commit (if any) in `design/STATUS.md` under "Submissions". Fetch the
-   entry page and take its **"Play Game" link** (a MATLAB Drive URL ending
-   in `Entry<id>.mlapp`; it opens the game for anyone signed in, who clicks
-   *Run*). Put both near the top of the game's README:
-   `▶ [Play <name>](<play link>) · [contest entry](<entry URL>)`.
-6. **The Tips & Tricks post** (required for the grand prizes and Most
-   Played): refresh `design/TIPS_POST.md` against the submitted code (every
-   number measured, every snippet run), put the entry URL in it, and give
-   them the post's path and where to post it: MATLAB Central → Discussions
-   → the contest channel (Contest Channels, "MATLAB One-Button Game Mini
-   Hack"), as a Tips & Tricks post. They post it themselves.
-7. **Report:** the entry URL, the title, what to do next (post the Tips
-   draft, share the link), and that `--submit` again after changes updates
-   their entry (if the contest allows resubmitting; say so if unknown).
+5. **Record** the gallery page's URL, title, date, character count and the
+   git commit (if any) in `design/STATUS.md` under "Shared". Fetch the
+   gallery page and take its **"Play Game" link** (a MATLAB Drive URL
+   ending in `Entry<id>.mlapp`; it opens the game for anyone signed in, who
+   clicks *Run*). Put both near the top of the game's README:
+   `▶ [Play <name>](<play link>) · [in the Mini Hack gallery](<page URL>)`.
+6. **The write-up:** refresh `design/WRITEUP.md` against the shared code
+   (every number measured, every snippet run) and put the play link in it.
+   Mention that, if they'd like to share it, the Mini Hack's Discussions
+   has a Tips & Tricks channel where it fits (they post it themselves).
+7. **Report:** the play link and the gallery page, the title, and what
+   they might do next (play it, share the link, post the write-up).
+   Whether sharing again after changes updates the same game in the
+   gallery is unknown; say so if they ask.

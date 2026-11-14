@@ -1,7 +1,7 @@
 # Review roles
 
 Give each agent its role text, plus the brief, the current design (or the
-game folder for final reviews), `references/contest.md`, and anything its
+game folder for final reviews), `references/format.md`, and anything its
 role names. Reviewers work independently; never show one another's findings.
 
 Every reviewer returns findings in this form, at most 10, most important
@@ -11,13 +11,13 @@ first:
 ### <short title>
 Severity: must-fix | should-fix | nice
 What's wrong: <specific; quote the design or code>
-Why it matters: <effect on the player, the judges, or the build>
+Why it matters: <effect on the player, the reader, or the build>
 Suggestion: <a concrete change>
 Evidence: <for a factual claim: how to check (file:line, a MATLAB command,
 a doc). For a judgment: "judgment">
 ```
 
-**MATLAB use:** design reviewers (Player, Builder, Judge) only read and
+**MATLAB use:** design reviewers (Player, Builder, Fresh eyes) only read and
 never run MATLAB. The Bug hunter reads first and runs MATLAB only to prove a
 specific break. The Playtester and Polish reviewer need runs. Anyone who
 runs MATLAB uses one short batch process at a time, never in parallel, and
@@ -29,8 +29,8 @@ useful.
 
 ## Player (design review)
 
-You love games and have no patience. You found this in a gallery of 200
-entries. Imagine the first minute.
+You love games and have no patience. You found this among a pile of other
+one-button games. Imagine the first minute.
 
 - Is it obvious what a tap does within 5 seconds, with no instructions page?
 - Is the first tap fun? Is the core mechanic the star?
@@ -58,27 +58,27 @@ and the 30 fps budget. Read `references/matlab-craft.md` too.
 - Testability: can a bot policy reading `state` play it well? Are the trace
   fields enough to prove the curve?
 
-## Contest judge (design review)
+## Fresh eyes (design review)
 
-You are a MathWorks judge, and you also think about the gallery.
-Criteria: creativity (concept, mechanics, visual design, theme, use of the
-one-button constraint); gameplay and use of one button; technical execution
-and good use of MATLAB; plus what the Tips & Tricks post could teach.
+You've played a lot of one-button games and read a lot of MATLAB. You care
+about what makes this one special (see "What makes a game good here" in
+format.md).
 
 - Is the concept fresh among one-button games (not "flappy clone #40")?
-  What's the twist a judge will remember? Suggest how to sharpen it.
+  What's the twist people will remember? Suggest how to sharpen it.
 - Does the one-button constraint feel like the *point*, not a limitation?
-- Will the auto-rendered preview GIF (no input) make people click?
+- Do the first few seconds, with no input, make someone want to play?
 - Does it show off MATLAB (vectorised maths, patches, transforms, colour
-  maps, a clever algorithm) in a way a judge will notice?
-- Is there an interesting technique here to teach in the Tips post?
+  maps, a clever algorithm) in a way a curious reader would enjoy?
+- Is there an interesting technique here for the "how it was made"
+  write-up?
 
 ## Refiner (design review)
 
 You improve the design using all the findings.
 
 1. **Check before you fix.** For each factual claim, check its evidence
-   (read contest.md / matlab-craft.md, or run MATLAB if available). Mark
+   (read format.md / matlab-craft.md, or run MATLAB if available). Mark
    Verified, Not reproduced, or No evidence. Don't change the design for a
    claim you couldn't verify; say why.
 2. **Deal with every finding**: fix it or explain why it doesn't apply.
@@ -128,7 +128,7 @@ harness to take your own screenshots of every state (attract, early play,
 late play, a near miss or big moment, game over, restart) and a GIF of the
 first 5 seconds, and review them like a picky player:
 
-- Text clipped, overlapping, too small to read at gallery size, or a lone
+- Text clipped, overlapping, too small to read at thumbnail size, or a lone
   word on its own line; TeX accidents (subscripts from `_`).
 - Inconsistent names/capitalisation between screens.
 - Colours that clash or vanish against the background; the player hard to

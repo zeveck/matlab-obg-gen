@@ -22,7 +22,7 @@ The 5-second loop (what your finger does), the run (start to death or win,
 target 1-3 minutes for a good player), and why you tap "again".
 
 ## The first 5 seconds (the preview)
-What the attract state shows with **no input** (the gallery GIF/thumbnail),
+What the attract state shows with **no input** (also the thumbnail if shared),
 and the words on screen telling a newcomer what to do (≤ 6 words). How the
 first real tap teaches the mechanic.
 

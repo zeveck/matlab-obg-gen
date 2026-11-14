@@ -1,7 +1,8 @@
-# The contest: contract, rules, judging, quirks
+# The format: contract, rules, quirks
 
-MATLAB One-Button Game Mini Hack (MATLAB Central, 25th anniversary).
-Runs Nov 2 – **Nov 29, 2026, 11:59:59 PM EST**.
+The games follow the format of MathWorks' MATLAB One-Button Game Mini Hack
+(MATLAB Central): one `game.m`, one button, at most 10,000 characters. Its
+starter project provides `minihackContest.play` / `.validate` / `.submit`.
 
 ## The contract
 
@@ -29,7 +30,7 @@ g.render(~, state)            -> (nothing)  % every tick; mutate handles only
 - An error in update/render stops the game and shows a `uialert`. There is
   no recovery: a single runtime error ends the player's session.
 
-## Hard rules (checked locally and re-checked on the server)
+## Hard rules (checked by `minihackContest.validate`)
 
 - **≤ 10,000 characters**, counted as `strlength(tree2str(mtree(file,'-file')))`,
   so comments are free but the code is **re-printed with generous
@@ -82,26 +83,24 @@ g.render(~, state)            -> (nothing)  % every tick; mutate handles only
   calls/names in code, not text inside strings or comments. Don't name your
   own variables or local functions after a banned function either.
 
-## Judging
+## What makes a game good here
 
-Grand prizes ($300/$200/$100), hand-picked by MathWorks judges on:
+1. **A fresh idea**: originality of concept, mechanics, look or theme, and
+   especially a clever use of the one-button limit.
+2. **It plays well with one button**: clear, engaging, playable from the
+   first tap.
+3. **It's well made**: runs reliably, and uses MATLAB nicely (vectorised
+   maths, patches, transforms, colour maps, a neat algorithm).
+4. **It teaches something**: a "how it was made" write-up that explains a
+   technique clearly (see writeup.md).
 
-1. **Game creativity** — originality of concept, mechanics, visual design,
-   theme, *or use of the one-button constraint*.
-2. **Gameplay and use of the one-button constraint** — clear, engaging,
-   playable with one control.
-3. **Technical execution** — runs reliably; uses MATLAB well.
-4. **Tips & Tricks post quality** — clarity, usefulness, accuracy, teaching
-   value. A post is required for grand prizes and for Most Played.
-
-**Most Played Award**: top 10 authors by plays of their most-played game
-($50 each). Ties broken by votes. So: an inviting thumbnail and a game people
-replay and share. Weekly T-shirt/sock draws for authors and players.
-
+An inviting first few seconds and a game people want to replay matter too.
+(If the person shares a game in the Mini Hack, its gallery thumbnail is the
+first thing others see.)
 ## Quirks that shape design
 
-- **The server renders a preview GIF and a screenshot** of each entry on
-  submit, presumably with no input. That's the gallery thumbnail: the
+- **The server renders a preview GIF and a screenshot** of each shared game
+  (on submit), presumably with no input. That's its gallery thumbnail: the
   attract/title state must look great and move within the first seconds
   with no taps. A static "Press SPACE" on black is a wasted thumbnail.
 - **The server renderer may differ from Windows desktop**: stick to default

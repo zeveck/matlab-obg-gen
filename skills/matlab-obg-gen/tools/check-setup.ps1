@@ -50,8 +50,8 @@ else { Say "MISSING" "Agentic Toolkit" "setup.md: 'Connecting Claude to MATLAB'"
 
 # 4. Contest toolkit add-on (installed by opening the starter project)
 $addon = Get-ChildItem (Join-Path $env:APPDATA "MathWorks\MATLAB Add-Ons") -Directory -Filter "minihackContestToolkit*" -ErrorAction SilentlyContinue
-if ($addon) { Say "OK" "contest toolkit $($addon.Name)" }
-else { Say "MISSING" "contest toolkit (minihackContest)" "open the starter project's minihackContest.prj in MATLAB (setup.md)" }
+if ($addon) { Say "OK" "Mini Hack tools $($addon.Name)" }
+else { Say "MISSING" "Mini Hack tools (minihackContest)" "open the starter project's minihackContest.prj in MATLAB (setup.md)" }
 
 # 5. Starter project in this folder
 if (Test-Path (Join-Path $Project "minihackContest.prj")) { Say "OK" "starter project in $Project" }

@@ -60,7 +60,7 @@ The budget is 33 ms at 30 fps. Rules that follow:
 - **`render` runs once right after `init`, before any `update`**: init must
   set every field render reads.
 - Toolbox functions (e.g. `padarray`, Image Processing) may not exist on
-  the contest server; stick to base MATLAB.
+  every machine that runs the game; stick to base MATLAB.
 - Colours must stay within [0,1]: clamp anything computed (pulses, mixes).
 - Index guards: empty pools, `find(...,1)` returning empty, `mod` for wrap.
 - Text `String` with TeX: stray `_` or `^` become sub/superscripts; set
@@ -148,7 +148,7 @@ grows ~1.5x. A first draft of Ninefold that "looked" like 8k was 16.4k;
   `'LineStyle','none','Marker','o'`.
 - A local `mk = @(Z,c) patch(...)` lambda for repeated patch creation.
 - Cut low-value features before hurting readability. Keep state field
-  names meaningful; judges read the code.
+  names meaningful; people read the code.
 
 ## Indexing shape gotcha
 

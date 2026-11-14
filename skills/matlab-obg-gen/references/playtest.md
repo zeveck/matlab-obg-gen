@@ -154,7 +154,7 @@ the level. Never ship levels that haven't been proven.
    it must behave the same (no tunnelling, same difficulty by time).
 8. **Look at every screenshot and both GIFs** (Read them): attract at 0, 2
    and 5 s, early/mid/late play, game over, after restart. Against the
-   polish checklist in review-roles.md. The idle GIF is the gallery
+   polish checklist in review-roles.md. The idle GIF is the game's
    preview: it must move and invite a click from the first frame.
    (The harness's screenshots crop to the axes' tight inset, a few px
    smaller than 800×600; that's the harness, not the game.)

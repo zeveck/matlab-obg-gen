@@ -74,12 +74,12 @@ connection.)
 4. Optional: in their own MATLAB, `shareMATLABSession` lets the tools drive
    the window they're looking at.
 
-## The contest starter project and toolkit
+## The Mini Hack starter project and its tools
 
 - The starter project (File Exchange #185098, "MATLAB One-Button Game
   Minihack Starter Project") needs the person's sign-in to download. Ask
   them to download it and unzip it into the project folder.
-- Opening it installs the contest toolkit (`minihackContest.*`):
+- Opening it installs the `minihackContest.*` tools (play, validate, submit):
   `openProject('<project>\minihackContest.prj')` (works in batch or MCP).
   Check with `~isempty(which('minihackContest.validate'))`.
 - In an MCP session that started outside the project, open the project

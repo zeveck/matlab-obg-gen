@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026.11.13.4
+
+- The skill's own instructions now describe making one-button MATLAB games
+  in the Mini Hack's format; sharing in its gallery is optional.
+  `contest.md` is now `format.md`, the "Contest judge" reviewer is "Fresh
+  eyes", and the Tips & Tricks draft is a "how it was made" write-up
+  (`design/WRITEUP.md`).
+
 ## 2026.11.13.3
 
 - Friendlier, more general wording: a plugin for making one-button MATLAB
