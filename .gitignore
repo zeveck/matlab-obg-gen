@@ -1,0 +1,6 @@
+# MATLAB runs and personal settings
+shots/
+*.asv
+.claude/settings.local.json
+.env
+node_modules/

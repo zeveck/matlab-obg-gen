@@ -1,0 +1,21 @@
+L1 (seed l): ended at 8.8 s, 8 taps, banner "LEVEL 1 CLEAR! / +720   CLEAN!" -> CLEAN CLEAR
+   human-timing player: 3/3 clean clears -> DOABLE
+L2 (seed m): ended at 10.8 s, 16 taps, banner "LEVEL 2 CLEAR! / +730   CLEAN!" -> CLEAN CLEAR
+   human-timing player: 3/3 clean clears -> DOABLE
+L3 (seed o): ended at 10.4 s, 15 taps, banner "LEVEL 3 CLEAR! / +800   CLEAN!" -> CLEAN CLEAR
+   human-timing player: 2/3 clean clears -> DOABLE
+L4 (seed n): ended at 18.2 s, 21 taps, banner "LEVEL 4 CLEAR! / +790   CLEAN!" -> CLEAN CLEAR
+   human-timing player: 3/3 clean clears -> DOABLE
+L5 (seed p): ended at 20.3 s, 27 taps, banner "LEVEL 5 CLEAR! / +830   CLEAN!" -> CLEAN CLEAR
+   human-timing player: 3/3 clean clears -> DOABLE
+L6 (seed l): ended at 22.4 s, 29 taps, banner "LEVEL 6 CLEAR! / +870   CLEAN!" -> CLEAN CLEAR
+   human-timing player: 3/3 clean clears -> DOABLE
+L7 (seed r): ended at 16.4 s, 17 taps, banner "LEVEL 7 CLEAR! / +980   CLEAN!" -> CLEAN CLEAR
+   human-timing player: 3/3 clean clears -> DOABLE
+L8 (seed s): ended at 25.5 s, 34 taps, banner "LEVEL 8 CLEAR! / +970   CLEAN!" -> CLEAN CLEAR
+   human-timing player: 3/3 clean clears -> DOABLE
+L9 (seed m): ended at 28.4 s, 39 taps, banner "LEVEL 9 CLEAR! / +1000   CLEAN!" -> CLEAN CLEAR
+   human-timing player: 3/3 clean clears -> DOABLE
+Full run: WON ALL NINE (mode 3, level 9, strays 0, score 19390, 179 s)
+
+RESULT: ALL LEVELS PROVEN BEATABLE

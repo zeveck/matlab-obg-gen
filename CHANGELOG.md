@@ -1,0 +1,20 @@
+# Changelog
+
+## 2026.11.13.1
+
+First release.
+
+- `/matlab-obg-gen <idea>`: brief, design, one round of design review
+  (player, MATLAB builder, contest judge), build in stages under the
+  10,000-character limit, headless play-testing, final review, polish pass,
+  README and a draft Tips & Tricks post.
+- Every level proven beatable: recorded solutions, a human-timing player,
+  and a full-run replay through the contest harness; `prove.m` per game.
+- `--submit`: gates on the proof, validation, the play-test suite and the
+  preview, then asks for a title and go-ahead, submits, records the URL and
+  refreshes the Tips & Tricks draft.
+- Setup check and guided setup: MATLAB (including a no-admin install and a
+  path repair), the MATLAB Agentic Toolkit and MCP server, the contest
+  starter project and toolkit, and machine headroom.
+- `ideas`, `--change`, `--continue`, `--plan-only`, `setup`, `help`.
+- Example game: Ninefold.

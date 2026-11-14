@@ -1,0 +1,14 @@
+{
+  "name": "matlab-obg-gen",
+  "owner": {
+    "name": "zeveck"
+  },
+  "description": "matlab-obg-gen: make, prove and submit entries for the MATLAB One-Button Game Mini Hack.",
+  "plugins": [
+    {
+      "name": "matlab-obg-gen",
+      "source": "./skills",
+      "description": "/matlab-obg-gen: describe a one-button game and get a finished, play-tested MATLAB contest entry, with every level proven beatable."
+    }
+  ]
+}
