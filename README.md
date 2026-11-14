@@ -10,6 +10,8 @@
 
 ![Ninefold's title screen](docs/images/title.gif)
 
+**▶ [Play Ninefold](https://drive.mathworks.com/sharing/4693849c-a5f5-4d1b-a661-52f2f9697a4b/Entry16598.mlapp)** (opens in MATLAB Drive; click *Run* there, free MathWorks account needed) · [its contest entry](https://www.mathworks.com/matlabcentral/communitycontests/contests/10/entries/16598)
+
 This is the whole request that [Ninefold](#example-ninefold) was made from:
 
 > /matlab-obg-gen Let's make a game where colored balls are trying to flow through a system of traps/pipes/seesaws/etc. the play area is divided into nine subareas. you can tap to rotate the whole screen or you can tap to rotate individual subareas. the idea it's a realtime puzzle game, kinda like the physical Perplexity toy, but with a lot going on and your interface is just the ability to rotate the room, subareas, and perhaps flip switches, toggle buttons, and whatnot, to control the flow, and your goal is to get all the balls through without any straggers. maybe there's a timer? and any left over balls count against your score? It should probably have a series of levels in increasing difficulty? it'd be great if it could generate more levels, but we only have so much code to work with!
@@ -140,7 +142,9 @@ Generated levels are allowed only as a fixed set of seeds that have each been pr
 
 *Nine rooms, nine levels, one button: turn the glowing room to pour every ball home.*
 
-Coloured balls drip into a box of nine rooms full of cups, shelves, seesaws and trap doors. A glow moves from room to room and then around the whole box; tap to turn whatever is glowing a quarter turn. Every ball has to leave through a hole of its own colour before the clock runs out. 9,927 / 10,000 characters, with all nine levels proven beatable with human timing. [Play it in the contest gallery](https://www.mathworks.com/matlabcentral/communitycontests/contests/10/entries/16598).
+Coloured balls drip into a box of nine rooms full of cups, shelves, seesaws and trap doors. A glow moves from room to room and then around the whole box; tap to turn whatever is glowing a quarter turn. Every ball has to leave through a hole of its own colour before the clock runs out. 9,927 / 10,000 characters, with all nine levels proven beatable with human timing.
+
+**▶ [Play Ninefold](https://drive.mathworks.com/sharing/4693849c-a5f5-4d1b-a661-52f2f9697a4b/Entry16598.mlapp)** (MATLAB Drive; click *Run*) · [contest entry](https://www.mathworks.com/matlabcentral/communitycontests/contests/10/entries/16598)
 
 | | |
 |---|---|

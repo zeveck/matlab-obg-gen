@@ -2,7 +2,7 @@
 
 *Nine rooms, nine levels, one button: turn the glowing room to pour every ball home.*
 
-**Play it in the contest gallery:** https://www.mathworks.com/matlabcentral/communitycontests/contests/10/entries/16598
+**▶ [Play Ninefold](https://drive.mathworks.com/sharing/4693849c-a5f5-4d1b-a661-52f2f9697a4b/Entry16598.mlapp)** (opens in MATLAB Drive; click *Run* there, free MathWorks account needed) · [contest entry](https://www.mathworks.com/matlabcentral/communitycontests/contests/10/entries/16598)
 
 Coloured balls drip into a box divided into nine 3×3 rooms full of cups,
 shelves, staircases, seesaws and trap doors. A glow moves from room to room
