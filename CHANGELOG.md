@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026.11.13.2
+
+- `--submit` records the entry's Play Game link (MATLAB Drive) and puts it,
+  with the entry link, at the top of the game's README.
+
 ## 2026.11.13.1
 
 First release.
