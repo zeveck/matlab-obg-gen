@@ -298,8 +298,11 @@ Automate everything except the decision itself.
    If it fails on authentication, ask them to sign in to MATLAB (Home tab ->
    sign in) and retry once. Any other error: show it plainly, don't retry.
 5. **Record** the entry URL, title, date, character count and the git
-   commit (if any) in `design/STATUS.md` under "Submissions", and add the
-   URL to the README.
+   commit (if any) in `design/STATUS.md` under "Submissions". Fetch the
+   entry page and take its **"Play Game" link** (a MATLAB Drive URL ending
+   in `Entry<id>.mlapp`; it opens the game for anyone signed in, who clicks
+   *Run*). Put both near the top of the game's README:
+   `▶ [Play <name>](<play link>) · [contest entry](<entry URL>)`.
 6. **The Tips & Tricks post** (required for the grand prizes and Most
    Played): refresh `design/TIPS_POST.md` against the submitted code (every
    number measured, every snippet run), put the entry URL in it, and give
