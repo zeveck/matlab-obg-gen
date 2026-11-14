@@ -42,7 +42,7 @@ harness. Re-run the proof after any change: `design/tests/replayAll.m`.
 In MATLAB, with the contest toolkit installed:
 
 ```matlab
-cd('C:\LocalDev\matlab-obg\games\ninefold')
+cd examples/ninefold   % in a contest project made with /matlab-obg-gen: cd games/ninefold
 minihackContest.play
 ```
 
