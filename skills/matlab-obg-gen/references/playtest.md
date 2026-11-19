@@ -49,17 +49,22 @@ Leftovers slow every later run and skew timings.
   `Shots` (tick 0 = right after init), a `Gif` window, a `Trace` of state per
   tick, `StopWhen`. Returns errors with the tick, ms per tick, and object
   counts at init vs end. See its header for all options.
-- `obgsuite(gameFile, outDir, ...)`: the standard suite (idle, spam,
+- `obgsuite(gameFile, outDir, ...)` (`outDir` may be omitted: a folder
+  under `tempdir`): the standard suite (idle, spam,
   5 random seeds, bad player, skilled bot), writes `summary.txt`, screenshots
   and GIFs. `'Quick', true` for milestone checks (~1 min); the full suite
   (~3-4 min) before any report.
 - `fetchrules.m`: prints the live limit and banned lists.
 
 Keep each game's test scripts in `design/tests/` (`suite.m`, `bots.m`...)
-and outputs in `design/shots/`. A typical `design/tests/suite.m`:
+and outputs in `design/shots/`. When you start building, **copy
+`obgtest.m` and `obgsuite.m` into `design/tests/tools/`** and have the test
+scripts add that folder by a path relative to themselves. `SKILL_DIR` is a
+versioned plugin-cache folder that disappears when the plugin updates, so a
+script that names it stops working later. A typical `design/tests/suite.m`:
 
 ```matlab
-addpath('<SKILL_DIR>/tools');
+addpath(fullfile(fileparts(mfilename('fullpath')), 'tools'));
 g = '<project>/games/<slug>/game.m';
 bot = @(s,k) <skilled policy reading s>;
 S = obgsuite(g, '<project>/games/<slug>/design/shots', ...
@@ -124,16 +129,41 @@ A strong bot getting far is NOT proof. For every level:
    everything, because people watch and adapt. A level that only a
    frame-perfect script can beat must be simplified or replaced.
 
-Put the whole proof behind one script, **`design/tests/prove.m`**: it replays
-every solution, runs the human-timing check and plays one full run from the
-title to the ending, and its last line says `ALL LEVELS PROVEN BEATABLE` or
-`NOT PROVEN`. `--submit` refuses unless it passes on the current game.m.
+Put the whole proof behind one entry point, **`design/tests/prove.m`**: it
+replays every solution, runs the human-timing check and plays one full run
+from the title to the ending, and its last line says
+`ALL LEVELS PROVEN BEATABLE` or `NOT PROVEN`. `--submit` refuses unless it
+passes on the current game.m. Make it hard to pass by accident:
+
+- Write it (and anything it calls) as a **function**, not a script, so it
+  can't overwrite variables in the caller's workspace.
+- Take the level list from the game (its level table or seed string), not
+  a hard-coded range, so an added level can't be skipped.
+- A level **fails** if its recorded solution has no input, or if its start
+  state already meets the clear condition: a clear with no taps proves
+  nothing.
+- Use the game's own copy of the tools (`design/tests/tools/`, above),
+  never a path into the plugin cache.
 If seeds are chosen by a solver, have it write the chosen seeds back into
 game.m, so the game and its solutions can never drift apart.
 
 Generated levels: ship a finite set of seeds, each with its own recorded
 solution. If the solver can't clear a seed, pick another seed or change
 the level. Never ship levels that haven't been proven.
+
+**Endless content** (an infinitely tall tower, an endless run) is fine
+when it's **playable by construction**, which takes all four:
+
+1. **A rule that always keeps a way forward**, written in the design: e.g.
+   the generator only joins pieces the solver has cleared, each starting
+   and ending somewhere safe.
+2. **A deep check over many seeds**: the solver and the human-timing
+   player get far into the run on each. Any failure is a hole in the rule;
+   fix the rule, not the seed.
+3. **No way to get stuck**: from any state the player can reach there's a
+   way forward, or the run ends cleanly (game over), never a stuck screen.
+4. **Difficulty levels off** at a point the human-timing player still
+   handles.
 
 ## What to check
 

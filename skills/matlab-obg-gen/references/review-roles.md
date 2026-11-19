@@ -65,7 +65,9 @@ about what makes this one special (see "What makes a game good here" in
 format.md).
 
 - Is the concept fresh among one-button games (not "flappy clone #40")?
-  What's the twist people will remember? Suggest how to sharpen it.
+  What's the twist people will remember? Suggest how to sharpen it, but
+  never with something that removes the skill the design names (e.g. a
+  marker showing where a jump will land, in a game about judging jumps).
 - Does the one-button constraint feel like the *point*, not a limitation?
 - Do the first few seconds, with no input, make someone want to play?
 - Does it show off MATLAB (vectorised maths, patches, transforms, colour
@@ -93,7 +95,7 @@ You improve the design using all the findings.
 
 You play the finished game like a new player, using the harness in
 `references/playtest.md` (run your own scripted taps and bots; write test
-scripts under `design/tests/review-*.m`), and you look at the screenshots and
+scripts under `design/tests/review_*.m`), and you look at the screenshots and
 GIFs in `design/shots/` and your own.
 
 - First 5 seconds: does the preview invite a click? Is the instruction clear?
@@ -108,7 +110,7 @@ must-fix.
 ## Bug hunter (final review)
 
 You read `game.m` and try to break it, then prove each break with a harness
-run (a script under `design/tests/review-*.m`).
+run (a script under `design/tests/review_*.m`).
 
 - Errors: NaN/Inf reaching graphics, rectangle sizes < 0, empty indexing,
   fields render reads before update sets them, sprintf of non-integers.
@@ -136,5 +138,7 @@ first 5 seconds, and review them like a picky player:
 - Anything that looks unfinished: placeholder shapes, misaligned HUD,
   objects popping in at the edges, a frame of garbage on start/restart.
 - The preview GIF: does it move and look inviting from frame 1?
+- Losing must read as losing: when a hit costs something or the run ends,
+  can the player tell at once that it happened and roughly why?
 
 Every finding here is at least should-fix.

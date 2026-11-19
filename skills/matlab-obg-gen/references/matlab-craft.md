@@ -147,8 +147,23 @@ grows ~1.5x. A first draft of Ninefold that "looked" like 8k was 16.4k;
 - `plot(ax, x, y, 'o', ...)` takes a LineSpec; `line` needs
   `'LineStyle','none','Marker','o'`.
 - A local `mk = @(Z,c) patch(...)` lambda for repeated patch creation.
-- Cut low-value features before hurting readability. Keep state field
-  names meaningful; people read the code.
+- Keep state field names meaningful; people read the code.
+
+**When over budget, cut in this order**, measuring each step:
+
+1. **Lossless compaction**: the same behaviour and look in fewer counted
+   characters (merged statements, `deal`, string tables, fewer nesting
+   levels, shared helpers). Do a full pass before cutting anything; on one
+   game it freed 312 characters with nothing visible lost.
+2. **Code the player never sees**: duplicate branches, over-general
+   helpers, attract-mode logic that could be simpler.
+3. **Wording**: shorter on-screen text (keep it clear).
+4. **Rule and score extras** that don't change how it plays.
+5. **Visual flair last.** People value the look most; propose such cuts
+   rather than making them.
+
+Never cut something a check relies on to save characters (behaviour at
+dt 0.05, the proof), and never the core tap mechanic.
 
 ## Indexing shape gotcha
 

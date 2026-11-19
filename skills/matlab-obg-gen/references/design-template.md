@@ -16,6 +16,10 @@ What a tap means (and only that). Why this is a clever use of one button,
 not just "jump". Name the skill being tested: timing, rhythm, counting,
 judging distance, risk/reward, reading patterns, committing. Say how the
 same tap stays interesting at minute 2 (context changes what it means).
+Nothing in the game may do that skill for the player (no marker showing
+where a jump will land in a game about judging jumps). Every choice and
+timing window must be judgeable by a person, by eye, at normal speed;
+being possible for a test player isn't enough.
 
 ## Core loop
 The 5-second loop (what your finger does), the run (start to death or win,
@@ -43,8 +47,7 @@ hgtransform...). A tiny ASCII sketch of the screen.
 
 ## Feedback (no sound allowed)
 What the player sees on a tap (must answer on the same tick), on scoring
-(a small celebration), and on losing something. Keep it short; extra
-effects are the first thing cut for characters.
+(a small celebration), and on losing something. Keep it short.
 
 ## Tech plan
 - World coordinates (800×600, YDir), state fields, the graphics objects
@@ -52,13 +55,14 @@ effects are the first thing cut for characters.
   ≤ ~15; see matlab-craft.md).
 - Physics/timing model and dt handling.
 - Character budget: estimate per part (init graphics, update logic, helpers)
-  against 10,000 (aim ≤ 8,500 counted, before extra effects).
+  against 10,000 (aim ≤ 8,500 counted for the first full build).
 
 ## Proving every level beatable
 The finite list of levels (or seeds), and how the solver will find a
 complete solution for each: what it searches over, its state copying, how
 determinism is guaranteed, and the "fully cleared" condition it checks.
-No endless content that can't all be verified.
+For endless content: the rule that guarantees a way forward (see
+"Endless content" in playtest.md) and how it will be checked.
 
 ## Bots (how the play-test proves it works)
 - The skilled bot: a policy `@(s,k)` reading state that plays well. What it
@@ -69,8 +73,9 @@ No endless content that can't all be verified.
 - Trace fields to log each tick to check the curve.
 
 ## Cut list
-What to drop first if characters or performance run out. The core tap
-mechanic is never on it.
+What to drop if characters or performance run out, in the order in
+matlab-craft.md: lossless compaction first, then hidden code, wording and
+rule extras; visual flair last. The core tap mechanic is never on it.
 
 ## Definition of done
 - [ ] **Every level has a recorded solution that fully clears it when

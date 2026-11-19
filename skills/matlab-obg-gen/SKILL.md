@@ -39,8 +39,10 @@ Five rules beat everything else:
    credit) when replayed through the real harness, and the play-test replays
    all of them after every change. A bot that "gets far" is not proof. If
    levels are generated, ship only a finite set of seeds that a solver has
-   cleared. Never ship endless levels that can't all be verified. If a level
-   can't be proven beatable, fix it or cut it, and say so.
+   cleared, or make endless content **playable by construction** (see
+   playtest.md): it must always have a way forward and can never get the
+   player stuck. If a level can't be proven beatable, fix it or cut it, and
+   say so.
 3. **The format's rules are hard gates.** `minihackContest.validate` must
    print `Validation passed.` with the live rules (not `SKIPPED`). Over the
    character cap or one banned call means the game doesn't fit the format.
@@ -51,7 +53,8 @@ Five rules beat everything else:
    specific existing game's name, characters, look or levels.
 
 **Keep the person posted:** one short plain line after each phase, about
-their game, not about phases or agents.
+their game, not about phases or agents. Name things as the person sees them
+("the title-screen demo", "a test player"), never by internal names.
 
 Read each reference file when you reach its phase:
 
@@ -83,7 +86,10 @@ Read each reference file when you reach its phase:
 - **`--change <slug> <what>`** — change a finished game: append the request
   to STATUS.md, update the design if the change is about design, rebuild,
   and re-run Phase 5 in full (every check, not just the changed part) and
-  the bug-hunter review, then report.
+  the bug-hunter review, then report. **Propose first** when the change
+  touches the core mechanic, needs cuts the person would see, or won't
+  fit: reply with the plan, its character cost and the cut options, and
+  wait for their pick. The game is theirs now.
 - **`--rounds n`** — design review rounds, 1-3 (default 1).
 - **`setup`** — only run the setup check and fix what's missing (Preflight
   step 0), then stop.
@@ -104,7 +110,8 @@ games/<slug>/
     GAME_DESIGN.md
     REVIEW_LOG.md
     WRITEUP.md        "how it was made" write-up
-    tests/            harness scripts (.m) and bot policies
+    tests/            harness scripts (.m), bot policies, prove.m
+      tools/          copies of obgtest.m and obgsuite.m (see playtest.md)
     shots/            screenshots and GIFs from the harness
 ```
 
@@ -211,7 +218,8 @@ is over ~9,000, simplify the design now, before building more.
 4. **Look.** The art direction: palette, background, shapes, text styling.
 5. **Feedback.** Make sure every tap answers visibly on the same tick and
    scoring has a small celebration (e.g. a particle burst), with whatever
-   characters are left. Extra effects come last and go first.
+   characters are left. If you run over, follow the cut order in
+   matlab-craft.md (lossless compaction first, visual flair last).
 
 Keep the source readable: short helper functions, sensible names, few
 comments (comments are free but keep them useful). People read the code.
@@ -261,12 +269,16 @@ against the polish checklist. Fix everything; re-shoot.
    `minihackContest.play`), character count.
 2. `design/WRITEUP.md`: a short "how it was made" write-up per
    `references/writeup.md`, teaching a MATLAB technique the game uses.
-3. Tick off STATUS.md.
-4. **Report** briefly and plainly: how many levels there are and that each
+3. A lossless compaction pass (matlab-craft.md, cut order step 1), so the
+   person has as much room as possible for changes. Re-run the proof and
+   the quick suite after it.
+4. Tick off STATUS.md.
+5. **Report** briefly and plainly: how many levels there are and that each
    one has a replayed solution proving it fully beatable; the name and the
    one-line pitch, how to
    play it now (in MATLAB: `cd('<abs path>/games/<slug>'); minihackContest.play`),
-   what's in it, the character count against 10,000, anything that doesn't
+   what's in it, the character count against 10,000 (and so how many are
+   free for changes), anything that doesn't
    work (plainly), the GIF path, and two or three ready-to-paste
    `/matlab-obg-gen --change <slug> ...` ideas.
 

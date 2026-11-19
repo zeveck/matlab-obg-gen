@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026.11.19.1
+
+Lessons from building a 100-floor game ("Floor It") with the skill.
+
+- Proofs are harder to pass by accident (#1): `prove.m` is a function that
+  reads its level list from the game; a level cleared with no input fails;
+  each game keeps its own copy of the tools in `design/tests/tools/`
+  instead of naming the versioned plugin folder. Reviewers write
+  `review_*.m` (MATLAB can't run hyphenated names). `obgsuite` no longer
+  needs an output folder. The Ninefold example's proof scripts are now
+  functions and reject empty solutions.
+- Character budget (#2): over budget, cut in a fixed order (lossless
+  compaction first, visual flair last, never anything a check relies on);
+  a compaction pass before handover, and the report says how many
+  characters are free. `--change` proposes first when a change touches the
+  core mechanic, needs visible cuts or won't fit.
+- Design and polish (#4): the design names the skill the player uses and
+  nothing may do it for them; choices must be judgeable by eye; the polish
+  check includes "losing reads as losing"; reports use the names the
+  person sees.
+- Endless content is allowed when it's playable by construction (#5): a
+  rule that keeps a way forward, a deep multi-seed check, no way to get
+  stuck, and difficulty that levels off.
+
 ## 2026.11.13.4
 
 - The skill's own instructions now describe making one-button MATLAB games
