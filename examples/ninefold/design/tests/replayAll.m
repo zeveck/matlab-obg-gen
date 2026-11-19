@@ -9,7 +9,7 @@ solDir = fullfile(here, '..', 'solutions');
 addpath(fullfile(here, '..', '..', '..', '..', 'skills', 'matlab-obg-gen', 'tools'));   % the skill's tools
 allOk = true;
 src = fileread(fullfile(gameDir, 'game.m'));
-seeds = regexp(src, 'z = ''([^'']{9})'';', 'tokens', 'once');
+seeds = regexp(src, 'z = ''([^'']+)'';', 'tokens', 'once');   % the game's level list
 seeds = seeds{1};
 T = cell(1, numel(seeds));
 for L = 1:numel(seeds)
@@ -21,11 +21,15 @@ for L = 1:numel(seeds)
         fprintf('L%d: solution is for seed %s but game.m has %s\n', L, S.seed, seeds(L));
         allOk = false; continue
     end
-    if isempty(S.taps)   % a "clear" with no input proves nothing
-        fprintf('L%d: EMPTY SOLUTION (no taps)\n', L);
+    if ~any(S.taps >= 1 & S.taps <= 30*120)   % a "clear" with no input proves nothing
+        fprintf('L%d: EMPTY SOLUTION (no taps in range)\n', L);
         allOk = false; continue
     end
     [s, g, fg] = nfLevelStart(gameDir, L);
+    if s.mode ~= 1   % the level must start in play, not already cleared
+        fprintf('L%d: START STATE IS NOT IN PLAY (mode %d)\n', L, s.mode);
+        close(fg); allOk = false; continue
+    end
     k = 0;
     while s.mode == 1 && k < 30*120
         k = k + 1;
@@ -48,18 +52,17 @@ end
 if allOk
     % one full run from the title, through every level, to the win screen
     pol =@(s, k) fullRunPolicy(s, k, T);
-    R = obgtest(fullfile(gameDir, 'game.m'), 'Frames', 30*60*9, 'Policy', pol, ...
+    R = obgtest(fullfile(gameDir, 'game.m'), 'Frames', 30*60*numel(seeds), 'Policy', pol, ...
         'Trace', @(s) [s.mode s.L s.strays s.score], 'StopWhen', @(s) s.mode == 3, ...
         'Shots', [], 'OutDir', fullfile(here, '..', 'shots'), 'Tag', 'fullrun');
     endState = R.trace(end, :);
     won = R.ok && endState(1) == 3 && endState(2) == numel(seeds) && endState(3) == 0;
     fprintf('Full run: %s (mode %d, level %d, strays %d, score %d, %.0f s)\n', ...
-        pick(won, 'WON ALL NINE', 'FAILED'), endState, R.ticks/30);
+        pick(won, 'WON EVERY LEVEL', 'FAILED'), endState, R.ticks/30);
     allOk = allOk && won;
     if ~R.ok, disp(R.err), end
 end
 fprintf('\nRESULT: %s\n', pick(allOk, 'ALL LEVELS PROVEN BEATABLE', 'NOT PROVEN'));
-clear fullRunPolicy
 end
 
 function t = pick(c, a, b)

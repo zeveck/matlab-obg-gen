@@ -66,8 +66,7 @@ format.md).
 
 - Is the concept fresh among one-button games (not "flappy clone #40")?
   What's the twist people will remember? Suggest how to sharpen it, but
-  never with something that removes the skill the design names (e.g. a
-  marker showing where a jump will land, in a game about judging jumps).
+  never with something that removes the skill the design names.
 - Does the one-button constraint feel like the *point*, not a limitation?
 - Do the first few seconds, with no input, make someone want to play?
 - Does it show off MATLAB (vectorised maths, patches, transforms, colour

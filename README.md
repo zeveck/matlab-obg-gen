@@ -127,7 +127,7 @@ This is the rule that matters most: a level that can't be beaten is worse than n
 - a full run, from the title screen to the ending, is replayed the way the real game runs;
 - all of it re-runs after every change (`design/tests/prove.m`), and `--submit` won't share a game unless it passes.
 
-Generated levels are allowed only as a fixed set of seeds that have each been proven this way. No endless levels that nobody has checked.
+Generated levels are allowed as a fixed set of seeds that have each been proven this way. Endless content is allowed only when it's playable by construction: a rule that always keeps a way forward, checked deep into many seeds by the solver and the human-timing player, with no way to get stuck.
 
 ## Tips
 

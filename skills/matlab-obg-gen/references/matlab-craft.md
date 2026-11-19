@@ -153,7 +153,7 @@ grows ~1.5x. A first draft of Ninefold that "looked" like 8k was 16.4k;
 
 1. **Lossless compaction**: the same behaviour and look in fewer counted
    characters (merged statements, `deal`, string tables, fewer nesting
-   levels, shared helpers). Do a full pass before cutting anything; on one
+   levels, shared helpers), without hurting readability. Do a full pass before cutting anything; on one
    game it freed 312 characters with nothing visible lost.
 2. **Code the player never sees**: duplicate branches, over-general
    helpers, attract-mode logic that could be simpler.

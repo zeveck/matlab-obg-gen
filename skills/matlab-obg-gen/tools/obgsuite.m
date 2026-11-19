@@ -2,7 +2,7 @@ function S = obgsuite(gameFile, outDir, varargin)
 %OBGSUITE Standard play-test suite for a One-Button Game game.m.
 %
 %   S = obgsuite(gameFile, outDir, Name, Value, ...)
-%   S = obgsuite(gameFile, Name, Value, ...)   outDir: tempdir/obgsuite
+%   S = obgsuite(gameFile, Name, Value, ...)   outDir: tempdir/obgsuite/<game folder>
 %
 %   Runs (each in a fresh hidden window, via obgtest):
 %     idle     no input for 15 s; preview GIF of the first 5 s; shots
@@ -28,10 +28,10 @@ function S = obgsuite(gameFile, outDir, varargin)
 
 names = {'Bot', 'BotSeconds', 'Mode', 'Trace', 'RandP', 'Shots', 'Dt', 'Quick'};
 if nargin < 2 || isempty(outDir)
-    outDir = fullfile(tempdir, 'obgsuite');
+    [~, gname] = fileparts(fileparts(gameFile)); outDir = fullfile(tempdir, 'obgsuite', gname);
 elseif any(strcmpi(outDir, names))   % called as obgsuite(game, Name, Value, ...)
     varargin = [{outDir} varargin];
-    outDir = fullfile(tempdir, 'obgsuite');
+    [~, gname] = fileparts(fileparts(gameFile)); outDir = fullfile(tempdir, 'obgsuite', gname);
 end
 p = inputParser;
 p.addParameter('Bot', []);

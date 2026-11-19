@@ -264,14 +264,14 @@ against the polish checklist. Fix everything; re-shoot.
 
 ## Phase 8 — Wrap up
 
-1. `README.md` for the game: name, one line, how to play (one sentence), what
+1. A lossless compaction pass (matlab-craft.md, cut order step 1), so the
+   person has as much room as possible for changes. Then re-run validate,
+   the proof, the dt-extremes runs and the quick suite.
+2. `README.md` for the game: name, one line, how to play (one sentence), what
    to look for, how to run it (`cd games/<slug>` then
    `minihackContest.play`), character count.
-2. `design/WRITEUP.md`: a short "how it was made" write-up per
+3. `design/WRITEUP.md`: a short "how it was made" write-up per
    `references/writeup.md`, teaching a MATLAB technique the game uses.
-3. A lossless compaction pass (matlab-craft.md, cut order step 1), so the
-   person has as much room as possible for changes. Re-run the proof and
-   the quick suite after it.
 4. Tick off STATUS.md.
 5. **Report** briefly and plainly: how many levels there are and that each
    one has a replayed solution proving it fully beatable; the name and the

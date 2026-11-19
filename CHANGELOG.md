@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026.11.19.2
+
+Fixes from a review of 2026.11.19.1.
+
+- The lossless compaction pass is the first wrap-up step (before the
+  README and write-up record the count), followed by validate, the proof,
+  the dt-extremes runs and the quick suite.
+- Games re-copy the tools when the skill's are newer; the MCP session
+  adds the game's tools folder. `obgsuite`'s default output folder is
+  per game.
+- Endless content: `prove.m` covers it too; the plugin README no longer
+  forbids it.
+- Ninefold's proof reads its whole seed list, rejects solutions with no
+  taps in range and levels that don't start in play.
+
 ## 2026.11.19.1
 
 Lessons from building a 100-floor game ("Floor It") with the skill.

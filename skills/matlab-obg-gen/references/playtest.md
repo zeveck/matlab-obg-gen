@@ -8,8 +8,8 @@ repeats after every change.
 ## Running MATLAB
 
 **MCP (preferred):** run code with the MATLAB MCP evaluate tool. Add the
-tools folder once per session:
-`addpath('<SKILL_DIR>/tools')`.
+game's `design/tests/tools` folder once per session (or `SKILL_DIR/tools`
+before the game has one).
 
 **Batch fallback (no MCP):** each call starts MATLAB (~40 s), so write a
 script and run it in one go. Find MATLAB: `C:\MATLAB\R*\bin\matlab.exe`,
@@ -61,7 +61,8 @@ and outputs in `design/shots/`. When you start building, **copy
 `obgtest.m` and `obgsuite.m` into `design/tests/tools/`** and have the test
 scripts add that folder by a path relative to themselves. `SKILL_DIR` is a
 versioned plugin-cache folder that disappears when the plugin updates, so a
-script that names it stops working later. A typical `design/tests/suite.m`:
+script that names it stops working later. When `--change` or `--continue`
+finds the skill's tools newer than the game's copy, copy them again. A typical `design/tests/suite.m`:
 
 ```matlab
 addpath(fullfile(fileparts(mfilename('fullpath')), 'tools'));
@@ -147,9 +148,9 @@ passes on the current game.m. Make it hard to pass by accident:
 If seeds are chosen by a solver, have it write the chosen seeds back into
 game.m, so the game and its solutions can never drift apart.
 
-Generated levels: ship a finite set of seeds, each with its own recorded
+Finite generated levels: ship a set of seeds, each with its own recorded
 solution. If the solver can't clear a seed, pick another seed or change
-the level. Never ship levels that haven't been proven.
+the level.
 
 **Endless content** (an infinitely tall tower, an endless run) is fine
 when it's **playable by construction**, which takes all four:
@@ -164,6 +165,10 @@ when it's **playable by construction**, which takes all four:
    way forward, or the run ends cleanly (game over), never a stuck screen.
 4. **Difficulty levels off** at a point the human-timing player still
    handles.
+
+For endless content, `prove.m` replays the recorded solution for each
+piece, runs the deep multi-seed and human-timing checks, and ends with the
+same `ALL LEVELS PROVEN BEATABLE` / `NOT PROVEN` line.
 
 ## What to check
 
